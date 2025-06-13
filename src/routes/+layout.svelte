@@ -1,20 +1,61 @@
 <script lang="ts">
+	import { afterNavigate } from '$app/navigation';
+	import { page } from '$app/state';
 	import '../app.css';
 
 	let { children } = $props();
+
+	let currentRoute = $state(page.route.id);
+	let currentHover = $state();
+
+	const navMenuEntries = [
+		{ href: '/', title: 'Home' },
+		{ href: '/search', title: 'Search' },
+		{ href: '/inbox', title: 'Inbox' },
+		{ href: '/user', title: 'Profile' },
+		{ href: '/tenders', title: 'Tenders' }
+	];
+
+	const select_hover = (href: string) => {
+		currentHover = href;
+	};
+	const deselect_hover = () => {
+		currentHover = null;
+	};
+
+	afterNavigate(() => {
+		currentRoute = page.route.id as string;
+	});
 </script>
 
-<nav class="flex h-10 items-center">
-	<div class="bg-blue-500 h-full w-1/4 flex items-center justify-center">
+<header class="flex h-22 items-center bg-gray-400">
+	<div class="h-full w-1/4 flex items-center justify-center">
 		<h1>COMPANY</h1>
 	</div>
-	<div class="bg-amber-600 h-full flex grow justify-evenly items-center">
-		<a href="/">home</a>
-		<a href="/search">Search</a>
-		<a href="/inbox">Inbox</a>
-		<a href="/user">Profile</a>
-		<a href="/tenders">Tenders</a>
-	</div>
-</nav>
+	<nav class="h-full flex grow justify-end justify-items-center">
+		{#each navMenuEntries as entry}
+			<a
+				href={entry.href}
+				class="h-full m-auto text-center grow text-sm/22"
+				class:highlighted={currentRoute == entry.href}
+				class:hovered={currentHover == entry.href}
+				onmouseenter={() => select_hover(entry.href)}
+				onmouseleave={deselect_hover}
+			>
+				{entry.title}
+			</a>
+		{/each}
+	</nav>
+</header>
+<hr />
 
 {@render children()}
+
+<style>
+	.highlighted {
+		background-color: whitesmoke;
+	}
+	.hovered {
+		background-color: burlywood;
+	}
+</style>
