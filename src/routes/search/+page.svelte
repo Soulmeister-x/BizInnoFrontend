@@ -1,3 +1,4 @@
-
 <h1>Search</h1>
-<p>Search form with detailled filters. Here you can search tenders or create search requests.</p>
+<h2>Erweiterte Suche nach Bekanntmachungen</h2>
+
+<div></div>
