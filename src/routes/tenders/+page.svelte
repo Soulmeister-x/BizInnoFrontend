@@ -19,3 +19,21 @@
 
 <h1>Tenders</h1>
 <p>Your tenders from the past, future and present.</p>
+
+<br />
+<div class="container mx-auto p-4">
+	{#each tenders as tender (tender.id)}
+		<div class="mb-4 border rounded-lg shadow-md p-4">
+			<h2>{tender.titel}</h2>
+			<p class="text-gray-600">
+				Source: <a href={tender.quelle_url} target="_blank">{tender.quelle_url}</a>
+			</p>
+			<p class="text-gray-600">
+				Published: {new Date(tender.veroeffentlichungsdatum).toLocaleDateString()}
+			</p>
+			<p class="text-gray-600">Deadline: {new Date(tender.bewerbungsfrist).toLocaleDateString()}</p>
+			<p class="text-gray-600">Categories: {tender.kategorien}</p>
+			<p class="text-gray-600">Location: {tender.ort}</p>
+		</div>
+	{/each}
+</div>
