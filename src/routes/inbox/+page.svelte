@@ -37,6 +37,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Nachrichten</title>
+</svelte:head>
+
 <link rel="stylesheet" href="icons.css" />
 
 <div class="m-8">
