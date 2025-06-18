@@ -1,30 +1,22 @@
 <script>
-	let items = $state([
-		{
-			title: 'Ausschreibung 1',
-			summary: 'Lorem Ipsum dolor met...',
-			feedback: 'Score: 8.2 --> You should consider applying.',
-			showSummary: false,
-			showFeedback: false
-		},
-		{
-			title: 'Ausschreibung 2',
-			summary: 'Lorem Ipsum dolor met...',
-			feedback: 'Score: 9.4 --> You should apply.',
-			showSummary: false,
-			showFeedback: false
-		},
-		{
-			title: 'Ausschreibung 3',
-			summary: 'Lorem Ipsum dolor met...',
-			feedback: 'Score: 5.4 --> Application not suggested.',
-			showSummary: false,
-			showFeedback: false
-		}
-	]);
-
+	import { BASE_API } from '$lib/config';
+	import { onMount } from 'svelte';
+	const endpoint = BASE_API + '/inbox';
+	let items = $state([]);
 	let start_date = $state('08/05/25');
 	let end_date = $state();
+
+	onMount(async function () {
+		const response = await fetch(endpoint);
+		const data = await response.json();
+		items = data.map((item) => {
+			return {
+				...item,
+				showSummary: false,
+				showFeedback: false
+			};
+		});
+	});
 
 	function toggleVisibility(item, type) {
 		if (type === 'summary') {
