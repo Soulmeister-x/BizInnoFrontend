@@ -31,9 +31,8 @@
 
 <svelte:head>
 	<title>Nachrichten</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </svelte:head>
-
-<link rel="stylesheet" href="icons.css" />
 
 <div class="m-8">
 	<p class="ml-2 mr-8 mb-8">
@@ -45,7 +44,7 @@
 			<!-- Search field -->
 			<div class="flex grow mr-14 m-6 pr-4 bg-white rounded-xl w-1/2 place-items-center">
 				<input class="m-4 border-b-2 grow" type="text" name="search_term" id="search_term" />
-				<span class="material-symbols--search p-5"></span>
+				<i class="material-icons">search</i>
 			</div>
 			<!-- Filter -->
 			<div class="flex items-center">
@@ -53,7 +52,7 @@
 				<span class="h-0 w-6 m-3 border-2"></span>
 				<p class="bg-white min-w-20 pl-8 pr-8 p-4 rounded-xl">{end_date || 'heute'}</p>
 				<div class="flex ml-12 w-min p-4 pl-6 pr-6 bg-white rounded-xl justify-items-center">
-					<span class="material-symbols--settings self-center p-4"></span>
+					<i class="material-icons">settings</i>
 				</div>
 			</div>
 		</div>
@@ -70,7 +69,7 @@
 							class="flex bg-red-950 text-white ml-6 p-4 rounded-sm place-items-center"
 						>
 							<p>Summary</p>
-							<span class="material-symbols--clipboard p-4 ml-2"></span>
+							<i class="material-icons pl-2">assignment</i>
 						</button>
 						<button
 							onclick={() => {
@@ -79,7 +78,7 @@
 							class="flex bg-green-800 text-white ml-6 p-4 rounded-sm place-items-center"
 						>
 							<p>Feedback</p>
-							<span class="material-symbols--pencil p-4 ml-2"></span>
+							<i class="material-icons pl-2">edit</i>
 						</button>
 					</div>
 					<div class="border-1 border-gray-400 rounded-xl">
