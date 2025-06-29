@@ -38,64 +38,61 @@
 				{/if}
 			</button>
 		</div>
-		<h1 class="text-2xl font-bold text-center mb-4">User Profile</h1>
+		<h1 class="text-2xl font-bold text-center mb-4">
+			User Profile (ID={userId})
+		</h1>
 		<div id="profile-table" class="columns-2">
 			<div>
-				<div><label for="name"><strong>Company Name:</strong></label></div>
+				<div><label for="name"><strong>Name:</strong></label></div>
+				<div><label for="description"><strong>Beschreibung:</strong></label></div>
+				<div><label for="keywords"><strong>Keywords:</strong></label></div>
 				<div><label for="branche"><strong>Branche:</strong></label></div>
-				<div><label for="specialization"><strong>Specialization:</strong></label></div>
-				<div><label for="city"><strong>City:</strong></label></div>
-				<div><label for="zipcode"><strong>Zip Code:</strong></label></div>
-				<div><label for="search_radius"><strong>Search Radius:</strong></label></div>
+				<div><label for="email"><strong>E-Mail:</strong></label></div>
 			</div>
 			<div>
 				{#if edit_mode_enabled}
-					<form method="post">
+					<form method="post" id="formUser">
 						<div><input type="text" value={userProfile?.name || ''} name="name" id="name" /></div>
 						<div>
-							<input type="text" value={userProfile?.branche || ''} name="branche" id="branche" />
+							<input
+								type="text"
+								value={userProfile?.description || ''}
+								name="description"
+								id="description"
+							/>
 						</div>
 						<div>
 							<input
 								type="text"
 								value={userProfile?.keywords || ''}
-								name="specialization"
-								id="specialization"
+								name="keywords"
+								id="keywords"
 							/>
 						</div>
 						<div>
-							<input type="text" value={userProfile?.city || ''} name="city" id="city" />
+							<input type="text" value={userProfile?.branche || ''} name="branche" id="branche" />
 						</div>
 						<div>
-							<input
-								type="text"
-								value={userProfile?.region?.zipcode || ''}
-								name="zipcode"
-								id="zipcode"
-							/>
-						</div>
-						<div>
-							<input
-								type="text"
-								value={userProfile?.radius || ''}
-								name="search_radius"
-								id="search_radius"
-							/>
+							<input type="text" value={userProfile?.email || ''} name="email" id="email" />
 						</div>
 					</form>
 				{:else if userProfile}
 					<div><p>{userProfile?.name || '-'}</p></div>
-					<div><p>{userProfile?.branche || '-'}</p></div>
+					<div><p>{userProfile?.description || '-'}</p></div>
 					<div><p>{userProfile?.keywords || '-'}</p></div>
-					<div><p>{userProfile?.city || '-'}</p></div>
-					<div><p>{userProfile?.zipcode || '-'}</p></div>
-					<div><p>{userProfile?.radius || '-'} km</p></div>
+					<div><p>{userProfile?.branche || '-'}</p></div>
+					<div><p>{userProfile?.email || '-'}</p></div>
 				{/if}
 			</div>
 		</div>
 		{#if edit_mode_enabled}
 			<div class="relative mt-8">
-				<button class="absolute bottom-0 right-0 cursor-pointer" type="submit">Send</button>
+				<button
+					form="formUser"
+					class="absolute bottom-0 right-0 cursor-pointer"
+					type="submit"
+					formaction="">OK</button
+				>
 			</div>
 		{/if}
 	</div>
@@ -111,5 +108,6 @@
 	}
 	input {
 		width: 100%;
+		border: 1px solid gray;
 	}
 </style>
