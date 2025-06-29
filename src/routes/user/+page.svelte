@@ -52,11 +52,11 @@
 			<div>
 				{#if edit_mode_enabled}
 					<form method="post" id="formUser">
-						<div><input type="text" value={userProfile?.name || ''} name="name" id="name" /></div>
+						<div><input type="text" value={userProfile?.name ?? ''} name="name" id="name" /></div>
 						<div>
 							<input
 								type="text"
-								value={userProfile?.description || ''}
+								value={userProfile?.description ?? ''}
 								name="description"
 								id="description"
 							/>
@@ -64,24 +64,27 @@
 						<div>
 							<input
 								type="text"
-								value={userProfile?.keywords || ''}
+								value={userProfile?.keywords ?? ''}
 								name="keywords"
 								id="keywords"
 							/>
 						</div>
 						<div>
-							<input type="text" value={userProfile?.branche || ''} name="branche" id="branche" />
+							<input type="text" value={userProfile?.branche ?? ''} name="branche" id="branche" />
 						</div>
 						<div>
-							<input type="text" value={userProfile?.email || ''} name="email" id="email" />
+							<input type="text" value={userProfile?.email ?? ''} name="email" id="email" />
+						</div>
+						<div hidden aria-hidden="true" class="display:none;">
+							<input type="number" hidden name="id" id="id" value={userId} />
 						</div>
 					</form>
 				{:else if userProfile}
-					<div><p>{userProfile?.name || '-'}</p></div>
-					<div><p>{userProfile?.description || '-'}</p></div>
-					<div><p>{userProfile?.keywords || '-'}</p></div>
-					<div><p>{userProfile?.branche || '-'}</p></div>
-					<div><p>{userProfile?.email || '-'}</p></div>
+					<div><p>{userProfile?.name ?? '-'}</p></div>
+					<div><p>{userProfile?.description ?? '-'}</p></div>
+					<div><p>{userProfile?.keywords ?? '-'}</p></div>
+					<div><p>{userProfile?.branche ?? '-'}</p></div>
+					<div><p>{userProfile?.email ?? '-'}</p></div>
 				{/if}
 			</div>
 		</div>
