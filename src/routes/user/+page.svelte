@@ -1,16 +1,21 @@
 <script>
 	import { BASE_API } from '$lib/config';
 	import { onMount } from 'svelte';
-	const endpoint = BASE_API + '/profile';
-	let userProfile = $state();
-	let start_date = $state('08/05/25');
-	let end_date = $state();
+	import { userConfig } from '$lib/stores';
+
+	let userId = $userConfig.userId;
+	const endpoint = BASE_API + '/unternehmen/' + userId;
+	let userProfile = $state(null);
 	let edit_mode_enabled = $state(false);
 
 	onMount(async function () {
-		const response = await fetch(endpoint);
-		const data = await response.json();
-		userProfile = data;
+		try {
+			const response = await fetch(endpoint);
+			const data = await response.json();
+			userProfile = data;
+		} catch (error) {
+			console.log('Fehler beim Laden des Benutzerprofils:', error);
+		}
 	});
 </script>
 
@@ -46,38 +51,45 @@
 			<div>
 				{#if edit_mode_enabled}
 					<form method="post">
-						<div><input type="text" value={userProfile.name} name="name" id="name" /></div>
+						<div><input type="text" value={userProfile?.name || ''} name="name" id="name" /></div>
 						<div>
-							<input type="text" value={userProfile.type_name} name="branche" id="branche" />
+							<input type="text" value={userProfile?.branche || ''} name="branche" id="branche" />
 						</div>
 						<div>
 							<input
 								type="text"
-								value={userProfile.specialization}
+								value={userProfile?.keywords || ''}
 								name="specialization"
 								id="specialization"
 							/>
 						</div>
-						<div><input type="text" value={userProfile.region.city} name="city" id="city" /></div>
 						<div>
-							<input type="text" value={userProfile.region.zipcode} name="zipcode" id="zipcode" />
+							<input type="text" value={userProfile?.city || ''} name="city" id="city" />
 						</div>
 						<div>
 							<input
 								type="text"
-								value={userProfile.region.radius}
+								value={userProfile?.region?.zipcode || ''}
+								name="zipcode"
+								id="zipcode"
+							/>
+						</div>
+						<div>
+							<input
+								type="text"
+								value={userProfile?.radius || ''}
 								name="search_radius"
 								id="search_radius"
 							/>
 						</div>
 					</form>
 				{:else if userProfile}
-					<div><p>{userProfile.name}</p></div>
-					<div><p>{userProfile.type_name}</p></div>
-					<div><p>{userProfile.specialization}</p></div>
-					<div><p>{userProfile.region.city}</p></div>
-					<div><p>{userProfile.region.zipcode}</p></div>
-					<div><p>{userProfile.region.radius} km</p></div>
+					<div><p>{userProfile?.name || '-'}</p></div>
+					<div><p>{userProfile?.branche || '-'}</p></div>
+					<div><p>{userProfile?.keywords || '-'}</p></div>
+					<div><p>{userProfile?.city || '-'}</p></div>
+					<div><p>{userProfile?.zipcode || '-'}</p></div>
+					<div><p>{userProfile?.radius || '-'} km</p></div>
 				{/if}
 			</div>
 		</div>
