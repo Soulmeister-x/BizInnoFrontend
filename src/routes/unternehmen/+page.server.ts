@@ -17,13 +17,13 @@ export const actions = {
         let apiResponseData;
         let success = false;
         let message = 'Ein unbekannter Fehler ist aufgetreten,';
-
         try {
             console.log("inside try block")
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
                 },
                 body: JSON.stringify(payload)
             });

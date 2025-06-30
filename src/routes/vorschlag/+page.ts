@@ -6,7 +6,12 @@ export const load: PageLoad = async () => {
     const endpoint = BASE_API + '/vorschlag';
     console.log(`Trying to fetch ${endpoint}`)
     try {
-        const response = await fetch(endpoint);
+        const response = await fetch(endpoint, {
+            headers: {
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
+            }
+        });
         const data = await response.json();
         const vorschlaege = data;
         return { vorschlaege };
