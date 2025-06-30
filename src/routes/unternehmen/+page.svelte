@@ -24,7 +24,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </svelte:head>
 
-<main class="pt-8">
+<main class="p-8">
 	<div class="container mx-auto p-4 border-2 rounded-lg shadow-md">
 		<div class="relative">
 			<button
@@ -100,17 +100,3 @@
 		{/if}
 	</div>
 </main>
-
-<style>
-	.container {
-		max-width: 600px;
-		margin: 0 auto;
-	}
-	#profile-table > div {
-		margin-bottom: 4px;
-	}
-	input {
-		width: 100%;
-		border: 1px solid gray;
-	}
-</style>

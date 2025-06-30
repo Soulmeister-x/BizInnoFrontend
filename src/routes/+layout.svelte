@@ -10,10 +10,10 @@
 
 	const navMenuEntries = [
 		{ href: '/', title: 'Home' },
-		{ href: '/search', title: 'Search' },
-		{ href: '/inbox', title: 'Inbox' },
-		{ href: '/user', title: 'Profile' },
-		{ href: '/tenders', title: 'Tenders' }
+		{ href: '/unternehmen', title: 'Unternehmen' },
+		{ href: '/ausschreibungen', title: 'Ausschreibungen' },
+		{ href: '/vorschlag', title: 'Vorschläge' },
+		{ href: '/anfragen', title: 'Anfragen' }
 	];
 
 	const select_hover = (href: string) => {
