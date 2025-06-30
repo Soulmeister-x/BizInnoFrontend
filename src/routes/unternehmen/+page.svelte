@@ -1,27 +1,9 @@
-<script>
-	import { BASE_API } from '$lib/config';
-	import { onMount } from 'svelte';
-	import { userConfig } from '$lib/stores';
+<script lang="ts">
+	import type { PageData } from './$types';
 
-	let userId = $userConfig.userId;
-	const endpoint = BASE_API + '/unternehmen/' + userId;
-	let userProfile = $state(null);
+	const { data } = $props<{ data: PageData }>();
+	let { userProfile } = data;
 	let edit_mode_enabled = $state(false);
-
-	onMount(async function () {
-		try {
-			const response = await fetch(endpoint, {
-				headers: {
-					'Content-Type': 'application/json',
-					'ngrok-skip-browser-warning': 'true'
-				}
-			});
-			const data = await response.json();
-			userProfile = data;
-		} catch (error) {
-			console.log('Fehler beim Laden des Benutzerprofils:', error);
-		}
-	});
 </script>
 
 <svelte:head>
@@ -43,10 +25,8 @@
 				{/if}
 			</button>
 		</div>
-		<h1 class="text-2xl font-bold text-center mb-4">
-			User Profile (ID={userId})
-		</h1>
-		<div id="profile-table" class="columns-2">
+		<h1 class="text-2xl font-bold text-center mb-4">Unternehmensprofil</h1>
+		<div class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 items-center">
 			<div>
 				<div><label for="name"><strong>Name:</strong></label></div>
 				<div><label for="description"><strong>Beschreibung:</strong></label></div>
@@ -81,15 +61,15 @@
 							<input type="text" value={userProfile?.email ?? ''} name="email" id="email" />
 						</div>
 						<div hidden aria-hidden="true" class="display:none;">
-							<input type="number" hidden name="id" id="id" value={userId} />
+							<input type="number" hidden name="id" id="id" value={userProfile.id} />
 						</div>
 					</form>
 				{:else if userProfile}
-					<div><p>{userProfile?.name ?? '-'}</p></div>
-					<div><p>{userProfile?.description ?? '-'}</p></div>
-					<div><p>{userProfile?.keywords ?? '-'}</p></div>
-					<div><p>{userProfile?.branche ?? '-'}</p></div>
-					<div><p>{userProfile?.email ?? '-'}</p></div>
+					<div><p>{userProfile.name}</p></div>
+					<div><p>{userProfile.description}</p></div>
+					<div><p>{userProfile.keywords}</p></div>
+					<div><p>{userProfile.branche}</p></div>
+					<div><p>{userProfile.email}</p></div>
 				{/if}
 			</div>
 		</div>

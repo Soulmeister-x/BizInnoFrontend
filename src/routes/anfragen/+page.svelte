@@ -1,6 +1,9 @@
 <script lang="ts">
+	import ListView from '$lib/components/ListView.svelte';
+	import AnfrageListItem from './AnfrageListItem.svelte';
+
 	export let data;
-	const { anfragen } = data;
+	const { items } = data;
 </script>
 
 <svelte:head>
@@ -8,19 +11,11 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </svelte:head>
 
-<main class="p-8">
-	<div class="container mx-auto p-4 border-2 rounded-lg shadow-md">
-		<div id="profile-table" class="grid grid-cols-[auto_1fr] gap-x-6">
-			{#each anfragen as anfrage}
-				<div><strong>ID:</strong></div>
-				<div><a href="/anfragen/{anfrage?.id}">{anfrage?.id ?? ''}</a></div>
-				<div><strong>Vorschlag:</strong></div>
-				<div><a href="/vorschlag/{anfrage?.vorschlag_id}">{anfrage?.vorschlag_id ?? ''}</a></div>
-				<div><strong>Text:</strong></div>
-				<div><p>{anfrage?.generierter_text ?? ''}</p></div>
-				<div><strong>Erstellungsdatum:</strong></div>
-				<div><p>{anfrage?.erstellt_am ?? ''}</p></div>
-			{/each}
-		</div>
+<main class="pt-8">
+	<h1>Anfragen</h1>
+	<div class="mb-8">
+		<p>Hier werden Anfragen aufgelistet</p>
 	</div>
+
+	<ListView {items} titel="Anfrage" baseUrl="anfragen" itemComponent={AnfrageListItem} />
 </main>

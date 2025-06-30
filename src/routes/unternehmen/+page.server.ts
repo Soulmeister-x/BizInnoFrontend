@@ -1,4 +1,4 @@
-import type { Actions } from "./$types";
+import type { Actions, PageServerLoad } from "./$types";
 import { BASE_API } from '$lib/config';
 
 const endpoint = BASE_API + '/unternehmen';
@@ -12,13 +12,10 @@ export const actions = {
             payload[key] = value;
         }
 
-        console.log("Sende Daten an API:", payload);
-
         let apiResponseData;
         let success = false;
         let message = 'Ein unbekannter Fehler ist aufgetreten,';
         try {
-            console.log("inside try block")
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
@@ -28,13 +25,10 @@ export const actions = {
                 body: JSON.stringify(payload)
             });
 
-            console.log("message was fetched")
-
             if (response.ok) {
                 apiResponseData = await response.json();
                 success = true;
                 message = 'Profil erfolgreich gespeichert!';
-                console.log("API-Response (success):", apiResponseData)
             } else {
                 const errorData = await response.json()
                 success = false
@@ -53,3 +47,31 @@ export const actions = {
         }
     }
 } satisfies Actions;
+
+
+export const load: PageServerLoad = async ({ fetch, params, cookies }) => {
+    const userId = 0  //cookies.get('userId')
+
+    let userProfile = null;
+
+    try {
+        const endpoint = `${BASE_API}/unternehmen/${userId}`
+        const response = await fetch(endpoint)
+        if (!response.ok) {
+            const errorBody = await response.json()
+            throw new Error('Fehler beim Laden der Daten vom Backend');
+        }
+        userProfile = await response.json()
+
+        return {
+            userProfile
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen:", error);
+        return {
+            items: [{}],
+            error: true,
+            message: 'Daten konnten nicht geladen werden.'
+        };
+    }
+}
