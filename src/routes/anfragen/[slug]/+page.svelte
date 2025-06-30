@@ -1,38 +1,32 @@
 <script lang="ts">
 	export let data;
-	const { selectedTender } = data;
-
-	const tenderId = selectedTender.id;
+	const { item } = data;
 </script>
 
 <svelte:head>
-	<title>Ausschreibung {tenderId}</title>
+	<title>Anfrage</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </svelte:head>
 
 <main class="p-8">
-	<div class="container mx-auto p-4 border-2 rounded-lg shadow-md">
-		<h1 class="text-2xl font-bold text-center mb-4">
-			Ausschreibung (ID={tenderId})
+	{#if data.error}
+		<p style="color: red;">{data.message}</p>
+	{:else}
+		<div class="container mx-auto p-4 border-2 rounded-lg shadow-md">
+			<h1 class="text-2xl font-bold text-center mb-4">Anfrage #{item.id}</h1>
 			<hr />
-		</h1>
-		<div id="profile-table" class="columns-2">
-			<div>
-				<div><label for="name"><strong>Titel:</strong></label></div>
-				<div><label for="description"><strong>Beschreibung:</strong></label></div>
-				<div><label for="keywords"><strong>Kategorien:</strong></label></div>
-				<div><label for="branche"><strong>Veroeffentlichungsdatum:</strong></label></div>
-				<div><label for="email"><strong>Bewerbungsfrist:</strong></label></div>
-			</div>
-			<div>
-				{#if selectedTender}
-					<div><p>{selectedTender?.titel ?? '-'}</p></div>
-					<div><p>{selectedTender?.beschreibung ?? '-'}</p></div>
-					<div><p>{selectedTender?.kategorien ?? '-'}</p></div>
-					<div><p>{selectedTender?.veroeffentlichungsdatum ?? '-'}</p></div>
-					<div><p>{selectedTender?.bewerbungsfrist ?? '-'}</p></div>
-				{/if}
+			<div id="profile-table" class="pt-6 grid grid-cols-[auto_1fr] gap-x-6">
+				<div><strong>Vorschlag:</strong></div>
+				<div>
+					<a href="/vorschlag/{item?.vorschlag_id}">{item?.vorschlag_id ?? ''}</a>
+				</div>
+				<div><strong>Text:</strong></div>
+				<div><p>{item?.generierter_text ?? ''}</p></div>
+				<div><strong>Status:</strong></div>
+				<div><p>{item?.status ?? ''}</p></div>
+				<div><strong>Erstellungsdatum:</strong></div>
+				<div><p>{item?.erstellt_am ?? ''}</p></div>
 			</div>
 		</div>
-	</div>
+	{/if}
 </main>
