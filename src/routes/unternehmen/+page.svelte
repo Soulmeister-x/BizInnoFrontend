@@ -10,7 +10,12 @@
 
 	onMount(async function () {
 		try {
-			const response = await fetch(endpoint);
+			const response = await fetch(endpoint, {
+				headers: {
+					'Content-Type': 'application/json',
+					'ngrok-skip-browser-warning': 'true'
+				}
+			});
 			const data = await response.json();
 			userProfile = data;
 		} catch (error) {

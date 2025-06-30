@@ -6,7 +6,12 @@ export const load: PageLoad = async ({ params }) => {
     if (params.slug) {
         const endpoint = BASE_API + '/ausschreibung/' + params.slug;
         try {
-            const response = await fetch(endpoint);
+            const response = await fetch(endpoint, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            });
             const data = await response.json();
             const selectedTender = data;
             return { selectedTender };

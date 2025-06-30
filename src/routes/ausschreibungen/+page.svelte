@@ -9,7 +9,12 @@
 	let end_date = $state(Date.now());
 
 	onMount(async function () {
-		const response = await fetch(endpoint);
+		const response = await fetch(endpoint, {
+			headers: {
+				'Content-Type': 'application/json',
+				'ngrok-skip-browser-warning': 'true'
+			}
+		});
 		const data = await response.json();
 		tenders = data;
 	});
