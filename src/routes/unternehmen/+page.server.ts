@@ -1,4 +1,4 @@
-import type { Actions } from "./$types";
+import type { Actions, PageServerLoad } from "./$types";
 import { BASE_API } from '$lib/config';
 
 const endpoint = BASE_API + '/unternehmen';
@@ -53,3 +53,32 @@ export const actions = {
         }
     }
 } satisfies Actions;
+
+
+export const load: PageServerLoad = async ({ fetch, params, cookies }) => {
+    const userId = 0  //cookies.get('userId')
+
+    let userProfile = null;
+
+    try {
+        const endpoint = `${BASE_API}/unternehmen/${userId}`
+        const response = await fetch(endpoint)
+        console.log(`Loaded unternehmen: ${response}`)
+        if (!response.ok) {
+            const errorBody = await response.json()
+            throw new Error('Fehler beim Laden der Daten vom Backend');
+        }
+        userProfile = await response.json()
+
+        return {
+            userProfile
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen:", error);
+        return {
+            items: [{}],
+            error: true,
+            message: 'Daten konnten nicht geladen werden.'
+        };
+    }
+}
