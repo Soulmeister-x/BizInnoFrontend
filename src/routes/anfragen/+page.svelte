@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let data;
-	const { anfragen } = data;
+	const { items } = data;
 </script>
 
 <svelte:head>
@@ -10,17 +10,20 @@
 
 <main class="p-8">
 	<div class="container mx-auto p-4 border-2 rounded-lg shadow-md">
-		<div id="profile-table" class="grid grid-cols-[auto_1fr] gap-x-6">
-			{#each anfragen as anfrage}
-				<div><strong>ID:</strong></div>
-				<div><a href="/anfragen/{anfrage?.id}">{anfrage?.id ?? ''}</a></div>
-				<div><strong>Vorschlag:</strong></div>
-				<div><a href="/vorschlag/{anfrage?.vorschlag_id}">{anfrage?.vorschlag_id ?? ''}</a></div>
-				<div><strong>Text:</strong></div>
-				<div><p>{anfrage?.generierter_text ?? ''}</p></div>
-				<div><strong>Erstellungsdatum:</strong></div>
-				<div><p>{anfrage?.erstellt_am ?? ''}</p></div>
-			{/each}
-		</div>
+		{#each items as anfrage}
+			<a href="/anfragen/{anfrage?.id}">
+				<div>
+					<h2>Anfrage #{anfrage.id}</h2>
+
+					<div class="grid grid-cols-[auto_1fr] gap-x-6">
+						<!--<div><a href="/vorschlag/{anfrage?.vorschlag_id}">{anfrage?.vorschlag_id ?? ''}</a></div>-->
+						<div><strong>Vorschlag:</strong></div>
+						<div><p>{anfrage?.generierter_text ?? ''}</p></div>
+						<div><strong>Erstellungsdatum:</strong></div>
+						<div><p>{anfrage?.erstellt_am ?? ''}</p></div>
+					</div>
+				</div></a
+			>
+		{/each}
 	</div>
 </main>
