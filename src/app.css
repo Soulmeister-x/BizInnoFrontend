@@ -1,1 +1,42 @@
 @import 'tailwindcss';
+
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+#profile-table > div {
+    margin-bottom: 4px;
+}
+input {
+    width: 100%;
+    border: 1px solid gray;
+}
+a {
+    color: #007bff; /* Primäre Linkfarbe */
+    text-decoration: none; /* Entfernt den Standard-Unterstrich */
+    position: relative; /* Wichtig für den Unterstrich-Effekt */
+    transition: color 0.3s ease-in-out; /* Sanfte Farbänderung */
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px; /* Dicke des Unterstrichs */
+    background-color: #0056b3; /* Farbe des Unterstrichs beim Hover */
+    bottom: -2px; /* Position unter dem Text */
+    left: 0;
+    transform: scaleX(0); /* Startet unsichtbar */
+    transform-origin: bottom right; /* Animationsursprung */
+    transition: transform 0.3s ease-in-out; /* Sanfter Animationseffekt */
+}
+
+a:hover {
+    color: #0056b3; /* Dunklere Farbe beim Hover */
+}
+
+a:hover::after {
+    transform: scaleX(1); /* Unterstrich erscheint von rechts nach links */
+    transform-origin: bottom left; /* Animationsursprung beim Hover */
+}
