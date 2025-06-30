@@ -1,5 +1,6 @@
 <script lang="ts">
-	import AnfrageItem from './AnfrageItem.svelte';
+	import ListView from '$lib/components/ListView.svelte';
+	import AnfrageListItem from './AnfrageListItem.svelte';
 
 	export let data;
 	const { items } = data;
@@ -10,10 +11,11 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </svelte:head>
 
-<main class="p-8">
-	<div class="container mx-auto p-4 border-2 rounded-lg shadow-md">
-		{#each items as item}
-			<AnfrageItem {item} />
-		{/each}
+<main class="pt-8">
+	<h1>Anfragen</h1>
+	<div class="mb-8">
+		<p>Hier werden Anfragen aufgelistet</p>
 	</div>
+
+	<ListView {items} titel="Anfrage" baseUrl="anfragen" itemComponent={AnfrageListItem} />
 </main>
