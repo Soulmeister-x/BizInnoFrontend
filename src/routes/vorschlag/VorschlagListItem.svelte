@@ -3,12 +3,8 @@
 </script>
 
 <div class="grid grid-cols-[auto_1fr] gap-x-6">
-	<div><strong>ID:</strong></div>
-	<div><a href="/vorschlag/{item.id}">{item.id}</a></div>
 	<div><strong>Ausschreibung:</strong></div>
-	<div>
-		<a href="/ausschreibungen/{item.ausschreibung_id}">{item.ausschreibung_id}</a>
-	</div>
+	<div><p>{item.ausschreibung_id}</p></div>
 	<div><strong>Matching Score:</strong></div>
 	<div><p>{item.matching_score}</p></div>
 	<div><strong>Status:</strong></div>
