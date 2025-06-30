@@ -4,7 +4,7 @@
 
 <div class="grid grid-cols-[auto_1fr] gap-x-6">
 	<div><strong>Ausschreibung:</strong></div>
-	<div><p>{item.ausschreibung_id}</p></div>
+	<div><p><a href="/ausschreibungen/{item.ausschreibung_id}">{item.ausschreibung_id}</a></p></div>
 	<div><strong>Matching Score:</strong></div>
 	<div><p>{item.matching_score}</p></div>
 	<div><strong>Status:</strong></div>

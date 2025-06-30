@@ -1,8 +1,8 @@
 <script lang="ts">
-	export let data;
-	const { items } = data;
 	import ListView from '$lib/components/ListView.svelte';
 	import AusschreibungListItem from './AusschreibungListItem.svelte';
+	export let data;
+	const { items } = data;
 </script>
 
 <svelte:head>

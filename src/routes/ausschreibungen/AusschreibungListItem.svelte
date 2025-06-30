@@ -13,9 +13,9 @@
 		<strong>Published:</strong>
 	</p>
 	<p>
-		{#if item.veroeffentlichungsdatum}{new Date(
-				item.veroeffentlichungsdatum
-			).toLocaleDateString()}{/if}
+		{#if item.veroeffentlichungsdatum}
+			{new Date(item.veroeffentlichungsdatum).toLocaleDateString()}
+		{/if}
 	</p>
 	<p><strong> Deadline:</strong></p>
 	<p>
