@@ -26,52 +26,74 @@
 			</button>
 		</div>
 		<h1 class="text-2xl font-bold text-center mb-4">Unternehmensprofil</h1>
-		<div class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 items-center">
-			<div>
+		<div>
+			<form
+				method="post"
+				id="formUser"
+				class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 items-center"
+			>
 				<div><label for="name"><strong>Name:</strong></label></div>
+				<div>
+					{#if edit_mode_enabled}<input
+							type="text"
+							value={userProfile?.name ?? ''}
+							name="name"
+							id="name"
+						/>
+					{:else}
+						<div><p>{userProfile.name}</p></div>
+					{/if}
+				</div>
 				<div><label for="description"><strong>Beschreibung:</strong></label></div>
+				<div>
+					{#if edit_mode_enabled}<input
+							type="text"
+							value={userProfile?.description ?? ''}
+							name="description"
+							id="description"
+						/>{:else}
+						<div><p>{userProfile.description}</p></div>
+					{/if}
+				</div>
 				<div><label for="keywords"><strong>Keywords:</strong></label></div>
+				<div>
+					{#if edit_mode_enabled}<input
+							type="text"
+							value={userProfile?.keywords ?? ''}
+							name="keywords"
+							id="keywords"
+						/>{:else}
+						<div><p>{userProfile.keywords}</p></div>
+					{/if}
+				</div>
 				<div><label for="branche"><strong>Branche:</strong></label></div>
+				<div>
+					{#if edit_mode_enabled}<input
+							type="text"
+							value={userProfile?.branche ?? ''}
+							name="branche"
+							id="branche"
+						/>{:else}
+						<div><p>{userProfile.branche}</p></div>
+					{/if}
+				</div>
 				<div><label for="email"><strong>E-Mail:</strong></label></div>
-			</div>
-			<div>
-				{#if edit_mode_enabled}
-					<form method="post" id="formUser">
-						<div><input type="text" value={userProfile?.name ?? ''} name="name" id="name" /></div>
-						<div>
-							<input
-								type="text"
-								value={userProfile?.description ?? ''}
-								name="description"
-								id="description"
-							/>
-						</div>
-						<div>
-							<input
-								type="text"
-								value={userProfile?.keywords ?? ''}
-								name="keywords"
-								id="keywords"
-							/>
-						</div>
-						<div>
-							<input type="text" value={userProfile?.branche ?? ''} name="branche" id="branche" />
-						</div>
-						<div>
-							<input type="text" value={userProfile?.email ?? ''} name="email" id="email" />
-						</div>
-						<div hidden aria-hidden="true" class="display:none;">
-							<input type="number" hidden name="id" id="id" value={userProfile.id} />
-						</div>
-					</form>
-				{:else if userProfile}
-					<div><p>{userProfile.name}</p></div>
-					<div><p>{userProfile.description}</p></div>
-					<div><p>{userProfile.keywords}</p></div>
-					<div><p>{userProfile.branche}</p></div>
-					<div><p>{userProfile.email}</p></div>
-				{/if}
-			</div>
+				<div>
+					{#if edit_mode_enabled}<input
+							type="text"
+							value={userProfile?.email ?? ''}
+							name="email"
+							id="email"
+						/>{:else}
+						<div><p>{userProfile.email}</p></div>
+					{/if}
+				</div>
+				<div>
+					<div hidden aria-hidden="true" class="display:none;">
+						<input type="number" hidden name="id" id="id" value={userProfile.id} />
+					</div>
+				</div>
+			</form>
 		</div>
 		{#if edit_mode_enabled}
 			<div class="relative mt-8">
