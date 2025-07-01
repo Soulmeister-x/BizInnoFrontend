@@ -9,13 +9,11 @@
 		<p><strong>Titel:</strong></p>
 		<p>{item.titel}</p>
 		<p><strong>Beschreibung:</strong></p>
-		<p>{item.description}</p>
+		<p>{item.beschreibung}</p>
 		<p><strong>Ort:</strong></p>
 		<p>{item.ort}</p>
 		<p><strong>Kategorien:</strong></p>
 		<p>{item.kategorien}</p>
-		<p><strong> Source:</strong></p>
-		<p><a href={item.quelle_url} target="_blank">{item.quelle_url}</a></p>
 		<p><strong> Published:</strong></p>
 		<p>
 			{#if item.veroeffentlichungsdatum}{new Date(
