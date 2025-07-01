@@ -1,1 +1,1 @@
-<h1>Welcome to the Homepage</h1>
+<h1>Willkommen zur Demonstration!</h1>
